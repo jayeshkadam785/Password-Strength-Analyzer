@@ -1,0 +1,222 @@
+:root {
+  --bg: #0B0F14;
+  --panel: #101720;
+  --panel-border: #1E2A36;
+  --ink: #E4ECF2;
+  --muted: #7C8DA0;
+  --cyan: #2FE6C6;
+  --amber: #FFC24B;
+  --red: #FF5C6C;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 15% 0%, #10202080 0%, transparent 40%), var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.scanline {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.5;
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes scan {
+  0% { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 64px 24px 40px;
+}
+
+.hdr-tag {
+  font-family: var(--mono);
+  color: var(--cyan);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 14px 0 8px;
+}
+h1 em { color: var(--cyan); font-style: normal; }
+
+.sub {
+  color: var(--muted);
+  margin: 0 0 32px;
+  font-size: 15px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 18px;
+}
+.field span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.field span em { color: #4B5B6B; font-style: normal; }
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  background: #0B1218;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus { border-color: var(--cyan); }
+
+.pw-row {
+  position: relative;
+  display: flex;
+}
+.pw-row input { flex: 1; padding-right: 44px; }
+#toggle {
+  position: absolute;
+  right: 6px; top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.meter-block { margin: 22px 0 16px; }
+.meter {
+  display: flex;
+  gap: 6px;
+  height: 8px;
+}
+.seg {
+  flex: 1;
+  background: #1B2531;
+  border-radius: 3px;
+  transition: background 0.25s;
+}
+.meter-label {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.stats div { display: flex; flex-direction: column; }
+.stats span { font-family: var(--mono); font-size: 20px; font-weight: 700; }
+.stats label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 13px;
+}
+.checklist li { color: var(--muted); }
+.checklist li.pass { color: var(--cyan); }
+.checklist li.pass::before { content: "✓ "; }
+.checklist li.fail::before { content: "○ "; }
+
+.suggestions {
+  background: #0B1218;
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  display: none;
+}
+.suggestions.show { display: block; }
+.suggestions ul { margin: 4px 0 0; padding-left: 18px; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+button.primary, button.ghost {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+button.primary {
+  background: var(--cyan);
+  color: #062420;
+}
+button.primary:disabled {
+  background: #1B2531;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+button.ghost {
+  background: transparent;
+  border-color: var(--panel-border);
+  color: var(--ink);
+}
+button.ghost:hover { border-color: var(--cyan); }
+
+.note {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cyan);
+  min-height: 16px;
+  margin: 12px 0 0;
+}
+
+.ftr {
+  margin-top: 24px;
+  color: #4B5B6B;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .checklist { grid-template-columns: 1fr; }
+}
