@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Strength Analyzer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <main class="wrap">
+    <header class="hdr">
+      <span class="hdr-tag">// vault.local</span>
+      <h1>Is your password<br><em>actually</em> safe?</h1>
+      <p class="sub">Length, complexity, and reuse — checked locally, scored honestly.</p>
+    </header>
+
+    <section class="panel">
+      <label class="field">
+        <span>Username <em>(optional — enables reuse detection)</em></span>
+        <input id="username" type="text" autocomplete="off" placeholder="jayesh_k">
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <div class="pw-row">
+          <input id="password" type="password" autocomplete="off" placeholder="Type a password to analyze…">
+          <button id="toggle" type="button" aria-label="Show password">👁</button>
+        </div>
+      </label>
+
+      <div class="meter-block">
+        <div class="meter" id="meter">
+          <div class="seg" data-i="0"></div>
+          <div class="seg" data-i="1"></div>
+          <div class="seg" data-i="2"></div>
+          <div class="seg" data-i="3"></div>
+          <div class="seg" data-i="4"></div>
+        </div>
+        <div class="meter-label" id="meterLabel">Awaiting input</div>
+      </div>
+
+      <div class="stats" id="stats" hidden>
+        <div><span id="entropy">0</span><label>bits entropy</label></div>
+        <div><span id="length">0</span><label>characters</label></div>
+      </div>
+
+      <ul class="checklist" id="checklist"></ul>
+
+      <div class="suggestions" id="suggestions"></div>
+
+      <div class="actions">
+        <button id="suggestBtn" class="ghost" type="button">Generate strong password</button>
+        <button id="saveBtn" class="primary" type="button" disabled>Save to history</button>
+      </div>
+      <p class="note" id="note"></p>
+    </section>
+
+    <footer class="ftr">
+      Password hashes are stored locally with PBKDF2-HMAC-SHA256 + per-user salt. Plaintext is never persisted.
+    </footer>
+  </main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
