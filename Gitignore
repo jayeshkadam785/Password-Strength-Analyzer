@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+
+# Note: passwords.db is intentionally committed with seeded demo data
+# for this submission. In a real deployment, do NOT commit this file —
+# each environment should generate its own local database.
