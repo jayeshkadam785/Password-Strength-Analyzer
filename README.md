@@ -51,7 +51,7 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
-Open **http://127.0.0.1:5000**
+Open **https://replit.com/@kajaljadhav532/Password-Strength-Analyzer?s=app
 
 ### Run the CLI
 
